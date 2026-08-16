@@ -1,8 +1,11 @@
+import { Button, Heading, Text, VStack } from "@chakra-ui/react";
+
 export default function Home() {
   return (
-    <main>
-      <h1>Hello World</h1>
-      <p>AI Lab is working.</p>
-    </main>
+    <VStack gap="4" p="10">
+      <Heading>Hello World</Heading>
+      <Text>AI Lab is working with Chakra UI.</Text>
+      <Button colorPalette="blue">Start Learning</Button>
+    </VStack>
   );
 }

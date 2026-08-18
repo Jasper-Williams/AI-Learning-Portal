@@ -1,9 +1,12 @@
 "use client";
 
-import { createClient } from "@/utils/supabase/client";
+import { createBrowserClient } from "@supabase/ssr";
 
 export default function SupabaseTest() {
-  const supabase = createClient();
+  createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!
+  );
 
   return (
     <main>

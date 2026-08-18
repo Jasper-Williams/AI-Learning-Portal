@@ -1,17 +1,25 @@
-import { createClient } from '@/utils/supabase/server'
-import { cookies } from 'next/headers'
+import { createClient } from "@/utils/supabase/server";
 
 export default async function Page() {
-  const cookieStore = await cookies()
-  const supabase = createClient(cookieStore)
+  const supabase = await createClient();
 
-  const { data: todos } = await supabase.from('todos').select()
+  const { data: todos, error } = await supabase
+    .from("todos")
+    .select();
 
   return (
-    <ul>
-      {todos?.map((todo) => (
-        <li key={todo.id}>{todo.name}</li>
-      ))}
-    </ul>
-  )
+    <main>
+      <h1>AI Learning Portal</h1>
+
+      {error ? (
+        <p>Supabase connection works, but the todos table is not set up yet.</p>
+      ) : (
+        <ul>
+          {todos?.map((todo: { id: string | number; name: string }) => (
+            <li key={todo.id}>{todo.name}</li>
+          ))}
+        </ul>
+      )}
+    </main>
+  );
 }
